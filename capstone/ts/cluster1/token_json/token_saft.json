@@ -1,0 +1,17 @@
+{
+    "name": "SAFT T1",
+    "symbol": "SAFT1",
+    "description": "A fungible token for the SAF ecosystem.",
+    "image": " https://devnet.irys.xyz/GCvp8e3UvU9oS51jcdAsCgJm8pbAVsFV26NWtHeSBxJn", 
+    "decimals": 6,
+    "properties": {
+      "type": "token",
+      "category": "asset",
+      "files": [
+        {
+          "uri": " https://devnet.irys.xyz/GCvp8e3UvU9oS51jcdAsCgJm8pbAVsFV26NWtHeSBxJn",
+          "type": "image/png"
+        }
+      ]
+    }
+  }
