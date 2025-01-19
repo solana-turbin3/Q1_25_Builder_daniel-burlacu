@@ -1,0 +1,187 @@
+use anchor_spl::token::{self, Mint, MintTo, Token, TokenAccount};
+
+declare_id!("9sZpn4qSY2Xh5MEUbkFWxcJJaMwVePunGpxTNEtHkrtk");
+
+pub mod errors;
+
+const JOIN_FEE: u64 = 800_000; // 0.8 Lamports
+use crate::errors::ErrorCode;
+
+#[program]
+pub mod veterinary_system {
+    use super::*;
+
+    /// Add a new Veterinary Cabinet to the system
+    pub fn add_veterinary_cabinet(
+        ctx: Context<AddVeterinaryCabinet>,
+        name: String,
+        id: String,
+        phone: String,
+        country: String,
+        town: String,
+        postcode: String,
+        address: String,
+        expire_date: i64,
+    ) -> Result<()> {
+        let cabinet = &mut ctx.accounts.cabinet;
+        let payer = &ctx.accounts.payer;
+        let fee_account = &mut ctx.accounts.fee_account;
+    
+        // Ensure the user has paid the required fee
+        if **payer.lamports.borrow() < JOIN_FEE {
+            return err!(ErrorCode::InsufficientFee);
+        }
+    
+        // Transfer lamports to the fee account
+        **payer.lamports.borrow_mut() -= JOIN_FEE;
+        **fee_account.lamports.borrow_mut() += JOIN_FEE;
+    
+        // Initialize the cabinet PDA
+        cabinet.name = name;
+        cabinet.id = id;
+        cabinet.phone = phone;
+        cabinet.country = country;
+        cabinet.town = town;
+        cabinet.postcode = postcode;
+        cabinet.address = address;
+        cabinet.wallet = payer.key();
+        cabinet.expire_date = expire_date;
+    
+        // Mint NFT for the cabinet (NFT minting logic placeholder)
+        // ...
+    
+        Ok(())
+    }    
+
+    /// Add a new Animal Owner
+    pub fn add_animal_owner(
+        ctx: Context<AddAnimalOwner>,
+        owner_name: String,
+        animal_id: String,
+    ) -> Result<()> {
+        let owner = &mut ctx.accounts.owner;
+
+        // Ensure the caller is a recognized veterinary cabinet
+        if ctx.accounts.cabinet.wallet != ctx.accounts.payer.key() {
+            return err!(ErrorCode::UnauthorizedAccess);
+        }
+
+        // Initialize the owner PDA
+        owner.name = owner_name;
+        owner.animal_id = animal_id;
+        owner.wallet = ctx.accounts.payer.key();
+
+        Ok(())
+    }
+
+    /// Add a new Animal
+    pub fn add_animal(
+        ctx: Context<AddAnimal>,
+        metadata: String,
+        owner_id: String,
+    ) -> Result<()> {
+        let animal = &mut ctx.accounts.animal;
+
+        // Ensure the caller is a recognized animal owner
+        if ctx.accounts.owner.wallet != ctx.accounts.payer.key() {
+            return err!(ErrorCode::UnauthorizedAccess);
+        }
+
+        // Initialize the animal PDA
+        animal.metadata = metadata;
+        animal.owner_id = owner_id;
+        animal.cabinet_id = ctx.accounts.cabinet.id.clone();
+
+        Ok(())
+    }
+
+    /// Transfer Animal Ownership
+    pub fn transfer_animal_ownership(
+        ctx: Context<TransferAnimalOwnership>,
+        new_owner_id: String,
+    ) -> Result<()> {
+        let animal = &mut ctx.accounts.animal;
+
+        // Update the owner ID for the animal PDA
+        animal.owner_id = new_owner_id.clone();
+
+        // Mint updated NFT for the new owner (NFT minting logic placeholder)
+        // ...
+
+        Ok(())
+    }
+}
+
+// Accounts and PDAs
+#[account]
+pub struct VeterinaryCabinet {
+    name: String,         // 4 bytes + name length
+    id: String,           // 4 bytes + id length
+    phone: String,        // 4 bytes + phone length
+    country: String,      // 4 bytes + country length
+    town: String,         // 4 bytes + town length
+    postcode: String,     // 4 bytes + postcode length
+    address: String,      // 4 bytes + address length
+    wallet: Pubkey,       // 32 bytes
+    expire_date: i64,     // 8 bytes
+}
+
+#[account]
+pub struct AnimalOwner {
+    name: String,       // 4 bytes + name length
+    animal_id: String,  // 4 bytes + animal ID length
+    wallet: Pubkey,     // 32 bytes
+}
+
+#[account]
+pub struct Animal {
+    metadata: String,  // 4 bytes + metadata length
+    owner_id: String,  // 4 bytes + owner ID length
+    cabinet_id: String, // 4 bytes + cabinet ID length
+}
+
+// Contexts
+#[derive(Accounts)]
+pub struct AddVeterinaryCabinet<'info> {
+    #[account(init, payer = payer, space = 8 + 320)] // Adjust space for VeterinaryCabinet struct
+    pub cabinet: Account<'info, VeterinaryCabinet>,
+    #[account(mut)]
+    pub payer: Signer<'info>, // User paying the fee
+    /// CHECK: Safe because this account is explicitly program-controlled
+    #[account(mut)]
+    pub fee_account: AccountInfo<'info>, // Program's fee account
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct AddAnimalOwner<'info> {
+    #[account(mut)]
+    pub cabinet: Account<'info, VeterinaryCabinet>,
+    #[account(init, payer = payer, space = 8 + 108)] // Adjust space for max sizes
+    pub owner: Account<'info, AnimalOwner>,
+    #[account(mut)]
+    pub payer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct AddAnimal<'info> {
+    #[account(mut)]
+    pub cabinet: Account<'info, VeterinaryCabinet>,
+    #[account(mut)]
+    pub owner: Account<'info, AnimalOwner>,
+    #[account(init, payer = payer, space = 8 + 328)] // Adjust space for max sizes
+    pub animal: Account<'info, Animal>,
+    #[account(mut)]
+    pub payer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct TransferAnimalOwnership<'info> {
+    #[account(mut)]
+    pub animal: Account<'info, Animal>,
+    #[account(mut)]
+    pub payer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
