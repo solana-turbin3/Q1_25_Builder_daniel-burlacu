@@ -6,7 +6,7 @@
 
 ### What is Turbin3 Builder's Cohort programe ?
 <div align="center">
-   <h1>🌟 Master Solana Development with Our 7-Week Intensive Program! 🚀
+   <h3>🌟 Master Solana Development with Our 7-Week Intensive Program! 🚀
 
 Join a comprehensive 7-week journey designed to transform you into a skilled Solana developer.
 
@@ -16,5 +16,5 @@ By the end of the program, you’ll:
 ✅ Launch a PoC/MVP on Devnet
 ✅ Showcase your project at Demo Day to key leaders from the Solana ecosystem
 
-This is more than a course—it's your gateway to becoming a Solana builder. 🚀✨ </h1>
+This is more than a course—it's your gateway to becoming a Solana builder. 🚀✨ </h3>
 </div>
