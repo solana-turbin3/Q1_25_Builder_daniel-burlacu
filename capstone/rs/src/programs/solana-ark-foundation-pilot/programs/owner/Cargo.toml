@@ -1,0 +1,31 @@
+[package]
+name = "solana-ark-foundation_owner"
+version = "0.1.0"
+description = "This is the Animal Program"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "owner"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[profile.release]
+overflow-checks = true
+
+[dependencies]
+anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+anchor-spl = "0.30.1"
+anchor-derive-accounts = "0.30.1"
+
+
+
+[patch.crates-io]
+curve25519-dalek = { version = "3.2.1" }
+zeroize = { version = "1.8.1" }
