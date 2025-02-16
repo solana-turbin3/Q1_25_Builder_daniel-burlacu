@@ -9,7 +9,7 @@
 
 An 7-week journey designed to transform you into a skilled Solana developer.
 
-- 📚 4 Weeks of Live Remote Sessions: Gain in-depth knowledge of Anchor, TypeScript client development, and testing strategies.
+- 📚 4 Weeks of Live Remote Sessions: Gain in-depth knowledge of Rust, Anchor, TypeScript client development, and testing strategies.
 - 💻 3-Week Building Sprint: Apply your skills to create a full project, from concept to deployment.
 By the end of the program, you’ll:
 - ✅ Launch a PoC/MVP on Devnet
