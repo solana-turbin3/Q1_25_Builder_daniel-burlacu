@@ -6,7 +6,8 @@
 
 ### What is Turbin3 Builder's Cohort programe ?
 - 🌟 Master Solana Development with an 7-Week Intensive Program! 🚀
-
+- 🎯 Enroll [here](https://turbine.com/#eductation)
+  
 An 7-week journey designed to transform you into a skilled Solana developer.
 
 - 📚 4 Weeks of Live Remote Sessions: Gain in-depth knowledge of Rust, Anchor, TypeScript client development, and testing strategies.
