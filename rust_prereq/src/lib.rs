@@ -21,7 +21,7 @@ mod tests {
     use crate::programs::Turbin3_prereq::{CompleteArgs, WbaPrereqProgram};
 
     const RPC_URL: &str = "https://api.devnet.solana.com";
-    const TURBIN3_PUBLIC_KEY: &str = "ALAAqK8zJkFsU2FmzzBypJZmJngBuQ6ayHeR2cHsTJN1";
+    const TURBIN3_PUBLIC_KEY: &str = "BN8LeCtMenajmBbzRKqkPFcP2hAJjrtCFfd4XmUqxJ9G";
 
     #[test]
     fn keygen() {
