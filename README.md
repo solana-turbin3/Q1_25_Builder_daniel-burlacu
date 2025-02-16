@@ -5,7 +5,7 @@
 </div>
 
 ### What is Turbin3 Builder's Cohort programe ?
-<div align="center">
+<div align="left">
    <h3>🌟 Master Solana Development with Our 7-Week Intensive Program! 🚀
 
 Join a comprehensive 7-week journey designed to transform you into a skilled Solana developer.
