@@ -20,9 +20,9 @@ This is more than a course—it's your gateway to becoming a Solana builder. �
 
 ### Entries
 - 🚧 kasbah-capstone: Capstone project, more details here.
-- ✅**[ts-prereq](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/blob/main/airdrop):** TypeScript prerequisites using Web3.js v1.x
-- 🦄 ts-prereq-web3js-v2: Typescript pre-requisites using the new web3.js v2.
-- ✅**[rust-prereq]( https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/blob/main/airdrop/enroll.ts):** Rust pre-requisites.
+- ✅ [ts-prereq](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/blob/main/airdrop): TypeScript prerequisites using Web3.js v1.x
+- 🦄 [ts-prereq-web3js-v2]( https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/blob/main/airdrop/enroll.ts): Typescript pre-requisites using the new web3.js v2.
+- ✅ [rust-prereq](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/rust_prereq): Rust pre-requisites.
 - ✅ wba-ts: Typescript classwork (aka./solana-starter/ts)
 - ✅ wba-rs: Rust classwork (aka ./solana-starter/rs)
 - ✅ vault: Vault program.
