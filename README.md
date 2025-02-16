@@ -28,5 +28,5 @@ This is more than a course—it's your gateway to becoming a Solana builder. �
 - ✅ [vault](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/capstone/rs/src/programs/fgg): Vault program.
 - ✅ [escrow](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/capstone/rs/src/programs/anchor-escrow): Escrow program.
 - ✅ [marketplace](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/capstone/rs/src/programs/marketplace): Marketplace program.
-- ✅ nft-staking: NFT staking program.
+- ✅ [nft-staking](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/programs/nft-staking): NFT staking program.
 - ✅ [amm](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/capstone/rs/src/programs/amm): Constant Product AMM program.
