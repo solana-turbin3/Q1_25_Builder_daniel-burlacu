@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 .anchor
 .DS_Store
 target
@@ -11,15 +9,7 @@ test-ledger
 test-ledger/rocksdb/*.log
 test-ledger/rocksdb/*.sst
 test-ledger/validator-*.loggit
-=======
-=======
->>>>>>> main
 *wallet.json
-node_modules
 yarn.lock
 capstone/test-ledger/rocksdb/
 capstone/test-ledger/*.log
-<<<<<<< HEAD
->>>>>>> 722f3cc (Remove large files and update .gitignore)
-=======
->>>>>>> main
