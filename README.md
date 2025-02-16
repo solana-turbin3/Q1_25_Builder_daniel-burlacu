@@ -19,7 +19,7 @@ By the end of the program, you’ll:
 This is more than a course—it's your gateway to becoming a Solana builder. 🚀✨ 
 
 ### Entries
-- 🚧 kasbah-capstone: Capstone project, more details here.
+- 🚧 [capstone](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/capstone/rs/src/programs/solana-ark-foundation-pilot): Capstone project,
 - ✅ [ts-prereq](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/blob/main/airdrop): TypeScript prerequisites using Web3.js v1.x
 - 🦄 [ts-prereq-web3js-v2]( https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/blob/main/airdrop/enroll.ts): Typescript pre-requisites using the new web3.js v2.
 - ✅ [rust-prereq](https://github.com/solana-turbin3/Q1_25_Builder_daniel-burlacu/tree/main/rust_prereq): Rust pre-requisites.
