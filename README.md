@@ -5,7 +5,7 @@
 </div>
 
 ### What is Turbin3 Builder's Cohort programe ?
-- 🌟 Master Solana Development with Our 7-Week Intensive Program! 🚀
+- 🌟 Master Solana Development with an 7-Week Intensive Program! 🚀
 
 An 7-week journey designed to transform you into a skilled Solana developer.
 
@@ -16,3 +16,16 @@ By the end of the program, you’ll:
 - ✅ Showcase your project at Demo Day to key leaders from the Solana ecosystem
 
 This is more than a course—it's your gateway to becoming a Solana builder. 🚀✨ 
+
+### Entries
+🚧 kasbah-capstone: Capstone project, more details here.
+✅ ts-prereq: Typescript pre-requisites using web3js v1.x as specified in the subject document.
+🦄 ts-prereq-web3js-v2: Typescript pre-requisites using the new web3.js v2.
+✅ rust-prereq: Rust pre-requisites.
+✅ wba-ts: Typescript classwork (aka./solana-starter/ts)
+✅ wba-rs: Rust classwork (aka ./solana-starter/rs)
+✅ vault: Vault program.
+✅ escrow: Escrow program.
+✅ marketplace: Marketplace program.
+✅ nft-staking: NFT staking program.
+✅ amm: Constant Product AMM program.
