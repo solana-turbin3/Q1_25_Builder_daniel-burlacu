@@ -5,14 +5,16 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-solana_ark_foundation_pilot = "C6HAkzF97sCRkzFp83ScP84bctYJisn479WWEZ6GEVL6"
+solana_ark_foundation_veterinary = "BpPGFK4wmgBAiSrS3BSq3BAziYH8yCZtd6apo8Ytsdks"
+solana_ark_foundation_animal = "BpPGFK8wmgBAiSrS2CCq1CAziYH9yCZtd1apo3Ytsdks"
+solana_ark_foundation_owner = "BpERFK2wmgBAiSrS2BSq3BAziYH8yCZtd5apo8Ytssss"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "Devnet"
+wallet = "~/.solana/.config/keypari.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
