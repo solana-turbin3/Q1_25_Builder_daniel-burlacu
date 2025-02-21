@@ -1,12 +1,19 @@
 // contexts/initialize.rs
 #![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
-use crate::entities::behaviour_record::BehaviourRecord;
+use crate::entities::{BehaviourRecord, VetAuthority}; // Import VetAuthority
 
 #[derive(Accounts)]
 pub struct AddBehaviourRecord<'info> {
     #[account(mut)]
     pub owner: Signer<'info>,
+
+    #[account(
+        mut,
+        seeds = [b"vet_authority", owner.key().as_ref()],
+        bump
+    )]
+    pub vet_authority: Account<'info, VetAuthority>, // New VetAuthority field
 
     #[account(
         init,
