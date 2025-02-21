@@ -1,4 +1,5 @@
 // contexts/initialize.rs
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 use crate::entities::owner::Owner;
 
