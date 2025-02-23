@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 use  crate::contexts::initialize::*;
-use crate::errors::ErrorCode;
 
 pub fn initialize(
     ctx: Context<Initialize>, 
@@ -18,19 +17,3 @@ pub fn initialize(
     Ok(())
 }
 
-pub fn update_animal(
-    ctx: Context<UpdateAnimal>, 
-    new_info: [u8; 32], 
-) -> Result<()> {
-    let vet_authority = &ctx.accounts.vet_authority;
-    require!(
-        vet_authority.is_authorized && vet_authority.vet_pubkey == ctx.accounts.payer.key(),
-        ErrorCode::UnauthorizedAccess
-    );
-
-    let animal = &mut ctx.accounts.animal;
-    animal.info = new_info;
-
-    msg!("Animal information updated");
-    Ok(())
-}

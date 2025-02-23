@@ -32,7 +32,7 @@ pub mod solana_vet {
         instructions::add_medical_record(ctx, record)
     }
 
-    pub fn add_behaviour_record(ctx: Context<AddBehaviourRecord>, record: [u8; 32]) -> Result<()> {
+    pub fn add_behaviour_record(ctx: Context<AddBehaviourRecord>, record:  Vec<u8>) -> Result<()> {
         msg!("Adding new behavior data record PDA");
         // Delegate logic to instructions module
         instructions::add_behaviour_record(ctx, record)
@@ -42,6 +42,11 @@ pub mod solana_vet {
         msg!("Adding new owner data record PDA");
         // Delegate logic to instructions module
         instructions::add_owner(ctx, owner_id, info)
+    }
+
+    pub fn remove_authority(ctx: Context<RemoveAuthority>) -> Result<()> {
+        msg!("Revoking Vet Authority");
+        instructions::remove_authority(ctx)
     }
 
 }

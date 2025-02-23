@@ -1,36 +1,6 @@
 use anchor_lang::prelude::*;
-use crate::entities::{VetAuthority, Owner};
-
-#[derive(Accounts)]
-pub struct RequestAuthority<'info> {
-    #[account(mut)]
-    pub requester: Signer<'info>, // The vet/entity requesting authority
-
-    #[account(
-        mut,
-        seeds = [b"vet_authority", owner.key().as_ref()],
-        bump
-    )]
-    pub vet_authority: Account<'info, VetAuthority>, // Authority PDA
-
-    #[account(mut)]
-    pub owner: Account<'info, Owner>, // The animal's owner (for reference)
-
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct ApproveAuthority<'info> {
-    #[account(mut)]
-    pub owner: Signer<'info>, // The owner must approve
-
-    #[account(
-        mut,
-        seeds = [b"vet_authority", owner.key().as_ref()],
-        bump
-    )]
-    pub vet_authority: Account<'info, VetAuthority>, // Authority PDA
-}
+use crate::errors::ErrorCode;
+use crate::contexts::vet_auth::{RemoveAuthority, ApproveAuthority, RequestAuthority}; // ✅ Fix: Explicitly import missing structs
 
 pub fn request_authority(ctx: Context<RequestAuthority>) -> Result<()> {
     let vet_authority = &mut ctx.accounts.vet_authority;
@@ -49,4 +19,17 @@ pub fn approve_request(ctx: Context<ApproveAuthority>) -> Result<()> {
     Ok(())
 }
 
+pub fn remove_authority(ctx: Context<RemoveAuthority>) -> Result<()> {
+    let vet_authority = &mut ctx.accounts.vet_authority;
 
+    // Ensure the authority exists before removing it
+    require!(
+        vet_authority.is_authorized,
+        ErrorCode::UnauthorizedAccess
+    );
+
+    vet_authority.is_authorized = false; // Revoke authorization
+
+    msg!("Vet Authority access revoked by Owner {:?}", ctx.accounts.owner.key());
+    Ok(())
+}

@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 use crate::contexts::medical_record::AddMedicalRecord;
-use crate::entities::VetAuthority;
 use crate::errors::ErrorCode;
 
 
@@ -8,10 +7,7 @@ pub fn add_medical_record(
     ctx: Context<AddMedicalRecord>,
     record: Vec<u8>,
 ) -> Result<()> {
-    let _authority_check: VetAuthority = VetAuthority {
-        is_authorized: false,
-        vet_pubkey: Pubkey::default(),
-    };// Ensure only authorized entities can add medical records
+    let vet_authority = &ctx.accounts.vet_authority;
     
     require!(
         vet_authority.is_authorized && vet_authority.vet_pubkey == ctx.accounts.signer.key(),
