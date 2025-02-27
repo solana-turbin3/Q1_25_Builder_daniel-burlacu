@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use crate::entities::{Animal, Owner, VetAuthority};
+use crate::entities::{Animal,VetAuthority};
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
@@ -15,15 +15,10 @@ pub struct Initialize<'info> {
     )]
     pub animal: Account<'info, Animal>,
 
-    #[account(
-        init_if_needed,
-        payer = payer,
-        seeds = [b"owner", payer.key().as_ref()], // Ensuring a unique Owner PDA
-        bump,
-        space = 8 + std::mem::size_of::<Owner>() 
-    )]
-    pub owner: Account<'info, Owner>, // Owner is created at initialization
-
+    /// CHECK: This account is owned by another program. We manually verify it in the instruction.
+#[account(mut)]
+pub owner: AccountInfo<'info>,
+  
     #[account(
         init_if_needed,
         payer = payer,
@@ -34,17 +29,4 @@ pub struct Initialize<'info> {
     pub vet_authority: Account<'info, VetAuthority>, // Authority PDA
 
     pub system_program: Program<'info, System>, 
-}
-
-pub fn initialize(ctx: Context<Initialize>, info: [u8; 32]) -> Result<()> {
-    let owner = &mut ctx.accounts.owner;
-    owner.owner_id = ctx.accounts.payer.key();
-    owner.info = info;
-
-    let authority = &mut ctx.accounts.vet_authority;
-    authority.is_authorized = false;
-    authority.vet_pubkey = Pubkey::default();
-
-    msg!("Initialized Owner & Vet Authority");
-    Ok(())
 }

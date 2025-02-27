@@ -18,15 +18,15 @@ pub struct Initialize<'info> {
     pub system_program: Program<'info, System>, // System program for transferring lamports
 }
 
-#[derive(Accounts)]
-pub struct UpdateOwner<'info> {
-    #[account(mut)]
-    pub payer: Signer<'info>, // Payer funds the account creation
+// #[derive(Accounts)]
+// pub struct UpdateOwner<'info> {
+//     #[account(mut)]
+//     pub payer: Signer<'info>, // Payer funds the account creation
 
-    #[account(
-        mut,
-        seeds =[b"owner".as_ref(), payer.key().as_ref()], // Seed for VeterinaryCabinet PDA
-        bump,
-    )]
-    pub owner: Account<'info, Owner>
-}
+//     #[account(
+//         mut,
+//         seeds =[b"owner".as_ref(), payer.key().as_ref()], // Seed for VeterinaryCabinet PDA
+//         bump,
+//     )]
+//     pub owner: Account<'info, Owner>
+// }

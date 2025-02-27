@@ -5,15 +5,16 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-solana_ark_foundation_veterinary = "BpPGFK4wmgBAiSrS3BSq3BAziYH8yCZtd6apo8Ytsdks"
-solana_ark_foundation_animal = "BpPGFK8wmgBAiSrS2CCq1CAziYH9yCZtd1apo3Ytsdks"
-solana_ark_foundation_owner = "BpERFK2wmgBAiSrS2BSq3BAziYH8yCZtd5apo8Ytssss"
+solana_ark_foundation_veterinary = "4kc8V5wtEu9fGsjyP9RoHRmFp1hREJkmfZ7MJpR57Eva"
+solana_ark_foundation_animal = "2huNFvFJBZvTqEwCjb2ZPExdGNfPdFnvNHghuAMUnzSw"
+solana_ark_foundation_owner = "2huNFvFJBZvTqEwCjb2ZPExdGNfPdFnvNHghuAMUnzSw"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Devnet"
+## cluster = "Devnet"
+cluster = "http://127.0.0.1:8898"
 wallet = "~/.solana/.config/keypari.json"
 
 [scripts]

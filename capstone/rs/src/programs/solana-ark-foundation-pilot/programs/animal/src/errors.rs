@@ -3,6 +3,8 @@ use anchor_lang::prelude::*;
 
 #[error_code]
 pub enum ErrorCode {
+    #[msg("Invalid owner.")]
+    InvalidOwner,
     #[msg("Unauthorized: Caller wallet does not match the cabinet owner.")]
     UnauthorizedAccess,
     #[msg("Invalid metadata: Metadata URI is required.")]
