@@ -5,9 +5,9 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-solana_ark_foundation_veterinary = "4kc8V5wtEu9fGsjyP9RoHRmFp1hREJkmfZ7MJpR57Eva"
-solana_ark_foundation_animal = "2huNFvFJBZvTqEwCjb2ZPExdGNfPdFnvNHghuAMUnzSw"
-solana_ark_foundation_owner = "2huNFvFJBZvTqEwCjb2ZPExdGNfPdFnvNHghuAMUnzSw"
+solana_ark_foundation_veterinary = "FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg"
+solana_ark_foundation_animal = "DZHj23G3RkSSZQ6pA9CWGYopCuFnUZ8WGJcnGnrVRY1i"
+solana_ark_foundation_owner = "Ctjucr5AAqnJkooGQS4WYbbpqyv9cg1srvi93ucSffKn"
 
 [registry]
 url = "https://api.apr.dev"

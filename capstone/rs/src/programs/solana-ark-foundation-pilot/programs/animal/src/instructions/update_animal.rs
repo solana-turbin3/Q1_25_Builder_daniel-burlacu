@@ -10,13 +10,18 @@ pub fn update_animal(
 
     // Ensure only authorized vets can update the animal
     require!(
-        vet_authority.is_authorized && vet_authority.vet_pubkey == ctx.accounts.payer.key(),
+        vet_authority.is_authorized == 1 && vet_authority.vet_pubkey == ctx.accounts.payer.key(), // ✅ Compare `is_authorized == 1`
         ErrorCode::UnauthorizedAccess
     );
 
     let animal = &mut ctx.accounts.animal;
     animal.info = new_info;
 
-    msg!("Animal information updated");
+    msg!(
+        "✅ Animal information updated by vet: {:?}",
+        ctx.accounts.payer.key()
+    );
+
     Ok(())
 }
+

@@ -1,30 +1,49 @@
 // contexts/initialize.rs
 #![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
-use crate::entities::{MedicalRecord, VetAuthority}; // Import VetAuthority
+use crate::entities::{Animal, MedicalRecord}; // Import VetAuthority
 
 #[derive(Accounts)]
 pub struct AddMedicalRecord<'info> {
     #[account(mut)]
-    pub signer: Signer<'info>,
+    pub signer: Signer<'info>, // Vet adding the record
 
     #[account(
-        mut,
-        seeds = [b"vet_authority", owner.key().as_ref()],
-        bump
-    )]
-    pub vet_authority: Account<'info, VetAuthority>, // New VetAuthority field
-
-     #[account(
-        init,
+        init_if_needed,
         payer = signer,
-        seeds = [b"medical_record", signer.key().as_ref()],
+        seeds = [b"medical_record", animal.key().as_ref(), signer.key().as_ref()],
         bump,
-        space = 8 + 32 + 32 + 8 // Adjusted for MedicalRecord struct
+        space = 8 + 32 + 32 + 8 + 200 // ✅ Adjust space (header + fixed fields + extra for Vec<u8>)
     )]
-    pub medical_record: Account<'info, MedicalRecord>, // Medical record PDA
+    pub medical_record: Account<'info, MedicalRecord>, // ✅ The medical record PDA
 
     #[account(mut)]
-    pub owner: SystemAccount<'info>,
+    pub animal: Account<'info, Animal>, // ✅ The animal to link the record to
+
     pub system_program: Program<'info, System>,
 }
+
+
+// pub struct AddMedicalRecord<'info> {
+//     #[account(mut)]
+//     pub signer: Signer<'info>, // ✅ Vet signing the transaction
+
+//     /// CHECK: Vet Authority PDA comes from another program, needs manual verification
+//     // #[account(mut)]
+//     // pub vet_authority: AccountInfo<'info>, // ✅ Vet authority from external program
+
+//     #[account(
+//         init,
+//         payer = signer,
+//         seeds = [b"medical_record", animal.key().as_ref(), signer.key().as_ref()], // ✅ Link record to both vet and animal
+//         bump,
+//         space = 8 + std::mem::size_of::<MedicalRecord>() // ✅ Ensure enough space for MedicalRecord struct
+//     )]
+//     pub medical_record: Account<'info, MedicalRecord>, // ✅ Medical record PDA
+
+//     /// CHECK: This account is owned by another program. We manually verify it in the instruction.
+//     #[account(mut)]
+//     pub animal: AccountInfo<'info>, // ✅ The animal the record belongs to
+
+//     pub system_program: Program<'info, System>,
+// }

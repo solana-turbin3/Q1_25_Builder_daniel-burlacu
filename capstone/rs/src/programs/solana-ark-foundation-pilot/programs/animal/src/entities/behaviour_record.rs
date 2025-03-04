@@ -3,7 +3,8 @@ use anchor_lang::prelude::*;
 
 #[account]
 pub struct BehaviourRecord {
-    pub record: Vec<u8>,  // 4 bytes + metadata length
-    pub owner_id: Pubkey,  // 4 bytes + owner ID length
-    pub id: Pubkey, // 4 bytes + animal ID length
+    pub animal_id: Pubkey, // ✅ Link record to a specific animal
+    pub vet: Pubkey,       // ✅ Vet who added the record
+    pub record: Vec<u8>,   // ✅ The medical data
+    pub date: i64,         // ✅ Timestamp
 }
