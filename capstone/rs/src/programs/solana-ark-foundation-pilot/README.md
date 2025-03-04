@@ -20,7 +20,7 @@
   - [Veterinary](https://explorer.solana.com/address/FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg?cluster=devnet)
   - [Animal](https://explorer.solana.com/address/DZHj23G3RkSSZQ6pA9CWGYopCuFnUZ8WGJcnGnrVRY1i?cluster=devnet)
   - [Animal-Owner](https://explorer.solana.com/address/Ctjucr5AAqnJkooGQS4WYbbpqyv9cg1srvi93ucSffKn?cluster=devnet).
-  - 
+
 ### Project Description
 
 Solana ARK Foundation – A Blockchain-Powered Future for Animal Welfare and Ecological Impact
