@@ -504,11 +504,11 @@ it("It adds a Behaviour record for an animal", async () => {
       animal_program.programId
     );
 
-    console.log("🔍 Medical Record PDA:", behaviourRecordPda.toBase58());
+    console.log("🔍 Behaviour Record PDA:", behaviourRecordPda.toBase58());
 
     // ✅ Add a medical record (without VetAuthority check)
-    console.log("🚀 Adding medical record...");
-    const recordData = Buffer.from("Animal received vaccine", "utf-8");
+    console.log("🚀 Adding behaviour record...");
+    const recordData = Buffer.from("Animal is feeling happy and protected.", "utf-8");
 
     const addRecordTx = await animal_program.methods
       .addBehaviourRecord(recordData) // ✅ Pass as a properly formatted byte array
@@ -521,19 +521,19 @@ it("It adds a Behaviour record for an animal", async () => {
       .signers([veterinaryWallet])
       .rpc();
 
-    console.log("✅ Medical record transaction:", addRecordTx);
+    console.log("✅ Behaviour record transaction:", addRecordTx);
 
     // ✅ Fetch and verify the added medical record
     const bevaviourRecord = await animal_program.account.behaviourRecord.fetch(behaviourRecordPda);
-    assert.ok(bevaviourRecord, "Medical Record should exist.");
-    assert.strictEqual(bevaviourRecord.animalId.toBase58(), animalPda.toBase58(), "Medical record should belong to the correct animal.");
-    assert.strictEqual(bevaviourRecord.vet.toBase58(), veterinaryWallet.publicKey.toBase58(), "Medical record should be added by the correct vet.");
-    assert.strictEqual(Buffer.from(bevaviourRecord.record).toString("utf-8"), "Animal received vaccine", "Medical record should store correct data.");
+    assert.ok(bevaviourRecord, "Behaviour Record should exist.");
+    assert.strictEqual(bevaviourRecord.animalId.toBase58(), animalPda.toBase58(), "Behaviour record should belong to the correct animal.");
+    assert.strictEqual(bevaviourRecord.vet.toBase58(), veterinaryWallet.publicKey.toBase58(), "Behaviour record should be added by the correct vet.");
+    assert.strictEqual(Buffer.from(bevaviourRecord.record).toString("utf-8"), "Animal is feeling happy and protected.", "Behaviour record should store correct data.");
 
-    console.log("✅ Medical record successfully added and verified!");
+    console.log("✅ Behaviour record successfully added and verified!");
 
   } catch (error) {
-    console.error("❌ Error adding medical record:", error);
+    console.error("❌ Error adding bevahiour record:", error);
     assert.fail(`Test failed: ${error.message}`);
   }
 });
