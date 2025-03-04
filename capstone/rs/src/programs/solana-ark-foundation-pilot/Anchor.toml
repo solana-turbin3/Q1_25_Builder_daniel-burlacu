@@ -13,8 +13,9 @@ solana_ark_foundation_owner = "Ctjucr5AAqnJkooGQS4WYbbpqyv9cg1srvi93ucSffKn"
 url = "https://api.apr.dev"
 
 [provider]
-## cluster = "Devnet"
-cluster = "http://127.0.0.1:8898"
+ cluster = "Devnet"
+# cluster = "http://127.0.0.1:8898"
+
 wallet = "~/.solana/.config/keypari.json"
 
 [scripts]

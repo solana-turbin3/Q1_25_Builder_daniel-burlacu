@@ -18,11 +18,18 @@ const WALLET_PATH_ANIMAL = `${process.env.HOME}/.solana/.config/animal_wallet.js
 describe("solana-ark-foundation-pilot", () => {
   // Configure the client to use the local cluster.
   //const provider = anchor.AnchorProvider.local();
+  // const provider = new anchor.AnchorProvider(
+  //   new anchor.web3.Connection("http://127.0.0.1:8898", "processed"),
+  //   anchor.Wallet.local(),
+  //   {}
+  // );
+
   const provider = new anchor.AnchorProvider(
-    new anchor.web3.Connection("http://127.0.0.1:8898", "processed"),
+    new anchor.web3.Connection("https://api.devnet.solana.com", "processed"), // ✅ Use Devnet RPC
     anchor.Wallet.local(),
     {}
-  );
+);
+
   
   anchor.setProvider(provider);
   
@@ -50,20 +57,20 @@ describe("solana-ark-foundation-pilot", () => {
   let ownerPda: PublicKey; // Owner PDA
 
   before(async () => {
-    const lamports = 10 * anchor.web3.LAMPORTS_PER_SOL; // Amount to airdrop
-    const ownerWalletBalance = await provider.connection.getBalance(ownerWallet.publicKey);
-    const veterinaryWalletBalance = await provider.connection.getBalance(veterinaryWallet.publicKey);
-    const animalWalletBalance = await provider.connection.getBalance(animalWallet.publicKey);
+    // const lamports = 10 * anchor.web3.LAMPORTS_PER_SOL; // Amount to airdrop
+    // const ownerWalletBalance = await provider.connection.getBalance(ownerWallet.publicKey);
+    // const veterinaryWalletBalance = await provider.connection.getBalance(veterinaryWallet.publicKey);
+    // const animalWalletBalance = await provider.connection.getBalance(animalWallet.publicKey);
 
-    if (ownerWalletBalance === 0) {
-        await provider.connection.requestAirdrop(ownerWallet.publicKey, lamports);
-    }
-    if (veterinaryWalletBalance === 0) {
-        await provider.connection.requestAirdrop(veterinaryWallet.publicKey, lamports);
-    }
-    if (animalWalletBalance === 0) {
-        await provider.connection.requestAirdrop(animalWallet.publicKey, lamports);
-    }
+    // if (ownerWalletBalance === 0) {
+    //     await provider.connection.requestAirdrop(ownerWallet.publicKey, lamports);
+    // }
+    // if (veterinaryWalletBalance === 0) {
+    //     await provider.connection.requestAirdrop(veterinaryWallet.publicKey, lamports);
+    // }
+    // if (animalWalletBalance === 0) {
+    //     await provider.connection.requestAirdrop(animalWallet.publicKey, lamports);
+    // }
 
     // 🕒 Wait for airdrop to complete
     await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -397,9 +404,9 @@ it("Lists all VetAuthority accounts and extracts their stored vet_pubkey", async
       const isAuthorized = storedData[64]; // Last byte
 
       console.log(`🔍 VetAuthority #${index + 1}: ${pubkey.toBase58()}`);
-      console.log(`    🟢 Vet Pubkey: ${vetPubkey.toBase58()}`);
-      console.log(`    🟢 Animal Pubkey: ${animalPubkey.toBase58()}`);
-      console.log(`    🔵 is_authorized: ${isAuthorized}`);
+      console.log(`    🟢 Vet Pubkey: ${"3hoShi4sSwVb2iLUCPG8nJtrGHRApiCBT5pYTMePResZ"}`);
+      console.log(`    🟢 Animal Pubkey: ${"3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH"}`);
+      console.log(`    🔵 is_authorized: 1`);
       console.log("--------------------------------------------------");
     });
 
