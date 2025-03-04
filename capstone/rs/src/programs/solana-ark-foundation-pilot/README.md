@@ -12,7 +12,10 @@
 
 ### Project Details Q1 2025
  **Project:**[website-presentation](https://www.solana-ark-foundation.xyz)
-- **Programs ID:** veterinary:FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg |animal: DZHj23G3RkSSZQ6pA9CWGYopCuFnUZ8WGJcnGnrVRY1i | animal-owner | Ctjucr5AAqnJkooGQS4WYbbpqyv9cg1srvi93ucSffKn
+- **Programs ID:**
+  - veterinary: FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg
+  - animal: DZHj23G3RkSSZQ6pA9CWGYopCuFnUZ8WGJcnGnrVRY1i
+  - animal-owner: Ctjucr5AAqnJkooGQS4WYbbpqyv9cg1srvi93ucSffKn
 - - **Block Explorers:**
   - [Veterinary](https://explorer.solana.com/address/FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg?cluster=devnet)
   - [Animal](https://explorer.solana.com/address/DZHj23G3RkSSZQ6pA9CWGYopCuFnUZ8WGJcnGnrVRY1i?cluster=devnet)
