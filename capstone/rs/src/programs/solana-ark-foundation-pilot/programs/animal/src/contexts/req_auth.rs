@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 use crate::entities::AuthorityRequest;
-//use crate::entities::VetAuthority;
 use crate::entities::Animal;
 
 #[derive(Accounts)]

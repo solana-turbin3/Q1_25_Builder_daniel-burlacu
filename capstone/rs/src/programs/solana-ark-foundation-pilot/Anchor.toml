@@ -5,16 +5,22 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-solana_ark_foundation_veterinary = "FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg"
-solana_ark_foundation_animal = "DZHj23G3RkSSZQ6pA9CWGYopCuFnUZ8WGJcnGnrVRY1i"
-solana_ark_foundation_owner = "Ctjucr5AAqnJkooGQS4WYbbpqyv9cg1srvi93ucSffKn"
+solana_ark_foundation_veterinary = "2fZDVKFYMytGp2zRH51mwktjzEbDn4YryFBLLxgo5fLp"
+solana_ark_foundation_animal = "7p5hMV3PRQvX37jKmPqyyXi3JejG2YSriMhAfbCdW8uH"
+solana_ark_foundation_owner = "Bvezpv2dHr5zF9LdJDJHASiLMJGpCAVZJFy5YHY4K4WB"
+
+
+# [programs.localnet]
+# solana_ark_foundation_veterinary = "2fZDVKFYMytGp2zRH51mwktjzEbDn4YryFBLLxgo5fLp"
+# solana_ark_foundation_animal = "7p5hMV3PRQvX37jKmPqyyXi3JejG2YSriMhAfbCdW8uH"
+# solana_ark_foundation_owner = "Bvezpv2dHr5zF9LdJDJHASiLMJGpCAVZJFy5YHY4K4WB"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-#  cluster = "Devnet"
-cluster = "http://127.0.0.1:8898"
+cluster = "Devnet"
+# cluster = "http://127.0.0.1:8898"
 
 wallet = "~/.solana/.config/keypari.json"
 

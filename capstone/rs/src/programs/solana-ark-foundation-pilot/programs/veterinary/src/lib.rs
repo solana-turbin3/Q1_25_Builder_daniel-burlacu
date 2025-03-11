@@ -1,7 +1,7 @@
 #![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 
-declare_id!("FaeFRU52JE9MKpQuq1EznrZBRBVAEb8vR5gu7XnDuHbg");
+declare_id!("2fZDVKFYMytGp2zRH51mwktjzEbDn4YryFBLLxgo5fLp");
 
 pub mod errors;
 pub mod contexts;

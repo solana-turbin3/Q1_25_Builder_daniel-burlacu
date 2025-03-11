@@ -45,61 +45,73 @@ Some of the NFT's examples from Q4 can be found here:
 
 An preview of the test checks:
 ```markdown
-    solana-ark-foundation-pilot
-✅ Veterinary PDA: FY5jtWQDnESQU6utxZxR5tghy7k5gKZbgYKCrfsBzQxY
-✅ Owner PDA: 85c5DowL76143M5F2FmjTJ1RtyFDYrUk6mJdCH3gDrtd
-✅ Animal PDA: 3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH
-✅ Vet Authority PDA: GvZ27cD6HkTFPWasXXjecffWG9gtAqfQqxe6w9h2Lcih
-✅ Veterinary PDA already exists: FY5jtWQDnESQU6utxZxR5tghy7k5gKZbgYKCrfsBzQxY
-    ✔ It initializes the veterinary account if it does not exist (403ms)
-✅ Owner PDA already exists: 85c5DowL76143M5F2FmjTJ1RtyFDYrUk6mJdCH3gDrtd
-    ✔ It initialize the animal owner ! (269ms)
-✅ Animal PDA already exists: 3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH
-    ✔ It initializes the animal program. (104ms)
-🔍 Veterinary PDA: FY5jtWQDnESQU6utxZxR5tghy7k5gKZbgYKCrfsBzQxY
-🔍 Owner PDA: 85c5DowL76143M5F2FmjTJ1RtyFDYrUk6mJdCH3gDrtd
-🔍 Animal PDA: 3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH
+     solana-ark-foundation-pilot
+✅ Veterinary PDA: HbVsrRNpcDQ9j4P4G7f1EtfPQvHJrQShtaYErdj1otML
+✅ Owner PDA: 2Fg7ERHjLNnvcoha2r7WkXr3Hhfp9LDZsgQDgAW77LfW
+✅ Animal PDA: YPD8wczXpG7S1T9KQbsdd1gc9QVNT6RmA2KtSDk6c4J
+⚠️ Veterinary account does not exist, initializing...
+✅ Veterinary account initialized, transaction signature: 52yyW13eB7LnDtKWBndR75UDSTnrE1oqnddykSnpRMTBLFN5YnGhq6SgXdUPGSSpKnNGwg9Gnsrq6nhbbxMKjJju
+    ✔ It initializes the veterinary account if it does not exist (2195ms)
+⚠️ Owner account does not exist, initializing...
+✅ Owner account initialized, transaction signature: 5rMPjRtgh3ddwFMKfymZ5C73XkzdCGceyGgL2NN897ogpsjBTDtpsVV2yguD9Xtu3b7e1FCRC1QP5dKAyGyc59BP
+    ✔ It initialize the animal owner ! (2060ms)
+⚠️ Animal account does not exist, initializing...
+🔍 Owner PDA: 2Fg7ERHjLNnvcoha2r7WkXr3Hhfp9LDZsgQDgAW77LfW
+✅ Animal account initialized, transaction signature: 26dAUu83u5vKPKychina4oF34QfELgsiYqMoKrgBFSvbAMxpnw6N4yRDRaHNYX2zGdaLCNqdLmECBrWt4PRAUM2x
+    ✔ It initializes the animal program. (3190ms)
+🔍 Veterinary PDA: HbVsrRNpcDQ9j4P4G7f1EtfPQvHJrQShtaYErdj1otML
+🔍 Owner PDA: 2Fg7ERHjLNnvcoha2r7WkXr3Hhfp9LDZsgQDgAW77LfW
+🔍 Animal PDA: YPD8wczXpG7S1T9KQbsdd1gc9QVNT6RmA2KtSDk6c4J
 🚀 Requesting authority from animal owner...
-✅ Authority request transaction submitted: 22P7b4yCMHxBwsP8c1Vpc8zDbjisupHUUsokERgC8McTyDxmCszGg1x8aAMFK9R5yeRveQngx5ycXZnSnXYWKfMh
+✅ Authority request transaction submitted: 28U2qTgLNx9Tc8nrWQQL5N4FSGFHawa4jVAJLL4ySpfw5mcZFan72BYvF59A64yAZ9rrCwPs5UK37VUgeJpoKyUw
 🔍 Request Status (Pending): 0
-    ✔ It creats authorisation request. (3625ms)
+    ✔ It creats authorisation request. (3052ms)
 🔍 Calling on-chain `check_pending_requests` function...
 ✅ Found 1 authority requests
 🔍 Authority Request #1:
-    🟢 Public Key: BnvegXduwV23p3NvKtKmQxigmFrZArc7sMJU4zTnLWXF
+    🟢 Public Key: 13YHKs5sReF9C5NfstAV5HqyFyCvH1ZgWbGr7Esj3zWY
     🟢 Vet Pubkey: 3hoShi4sSwVb2iLUCPG8nJtrGHRApiCBT5pYTMePResZ
-    🟢 Owner Pubkey: 85c5DowL76143M5F2FmjTJ1RtyFDYrUk6mJdCH3gDrtd
-    🟢 Animal Pubkey: 3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH
+    🟢 Owner Pubkey: 2Fg7ERHjLNnvcoha2r7WkXr3Hhfp9LDZsgQDgAW77LfW
+    🟢 Animal Pubkey: YPD8wczXpG7S1T9KQbsdd1gc9QVNT6RmA2KtSDk6c4J
     🔵 Status: Pending
 --------------------------------------------------
-✅ On-chain request scan executed successfully, transaction: RgG6FD7EVnAWMVsQXgCzDApwj1zbdEpVHpd5CyuBY5Pv3o9qhHWWkbC3KoFLTz5mes27JomBfjUxV6KER497D7j
-    ✔ It checks for any outstanding authority requests via the on-chain function. (8037ms)
-🔍 Vet Authority Request PDA: BnvegXduwV23p3NvKtKmQxigmFrZArc7sMJU4zTnLWXF
-🔍 Vet Authority PDA: GvZ27cD6HkTFPWasXXjecffWG9gtAqfQqxe6w9h2Lcih
+✅ On-chain request scan executed successfully, transaction: 2HA5vHNxQUVwzndgTckrvEtbJW6rfiD4igqfkdRSiM9TTUJA5v2XR8sBX9EHXxks94BqemvGtgdEHoVTMFSpPWBi
+    ✔ It checks for any outstanding authority requests via the on-chain function. (2969ms)
+🔍 Vet Authority Request PDA: 13YHKs5sReF9C5NfstAV5HqyFyCvH1ZgWbGr7Esj3zWY
+🔍Passing the Vet Authority PDA: H77uQYzXxcNyRokRhzS6N38ZA3Jq9mBbKDCpurekfccH
 🚀 Approving request...
-✅ Authority request approved, transaction: 3LdGBHbTd3Z2vkjUTcBVwuU29hYWDcBpNdqXYLeYH7UaowKMDxdMeaq28BGSvrftBTYcs5X7FfzUQDj1joP19w9R
-🔍 Request Status (Approved): 1
-    ✔ It approves the veterinary cabinet's authority request. (3239ms)
-🔍 Fetching all VetAuthority accounts...
-✅ Found 1 VetAuthority accounts
-🔍 VetAuthority #1: GzRikKmr8XhkLXVQbh72AGzY5FFovJcKb6paLm7B2bCW
+✅ Authority request approved, transaction: 4724HbSGQM2Cjn1g139cUQPBig33eXRjkMqsqWHKDXmf3a7b4GKQCLZ6AMe1ScZFGeixsz1hdehJdBkcbBrmMHfm
+🔍 Request Status (Approved): 0
+    ✔ It approves the veterinary cabinet's authority request. (2258ms)
+🔍 Searching VetAuthority accounts for VetPubkey: 3hoShi4sSwVb2iLUCPG8nJtrGHRApiCBT5pYTMePResZ...
+✅ Found 1 total VetAuthority accounts
+🔍 VetAuthority #1: H77uQYzXxcNyRokRhzS6N38ZA3Jq9mBbKDCpurekfccH
     🟢 Vet Pubkey: 3hoShi4sSwVb2iLUCPG8nJtrGHRApiCBT5pYTMePResZ
-    🟢 Animal Pubkey: 3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH
+    🟢 Animal Pubkey: YPD8wczXpG7S1T9KQbsdd1gc9QVNT6RmA2KtSDk6c4J
     🔵 is_authorized: 1
 --------------------------------------------------
-    ✔ Lists all VetAuthority accounts and extracts their stored vet_pubkey (101ms)
+    ✔ Lists all VetAuthority accounts and extracts their stored vet_pubkey (206ms)
+🔍 Checking Vet Authority...
+🔍 Vet Authority PDA: H77uQYzXxcNyRokRhzS6N38ZA3Jq9mBbKDCpurekfccH
+✅ Vet authority check passed!
+    ✔ It checks if veterinary cabinet has authority for an animal (103ms)
 🔍 Deriving Medical Record PDA...
-🔍 Medical Record PDA: BfYQ4f1bTBniCjzLootysHicHMvgq97gtDYhSddkvV4g
+🔍 Medical Record PDA: HHDqdHaFtBZ8VfZsT1kf9tNykxN6PpBaFkta8pt6xYKP
+⚠️ Medical record does not exist, creating a new one...
 🚀 Adding medical record...
-✅ Medical record transaction: 488XFKPnfsrXFrhsPsKkXG8y4TNzFdP3C3KTpyLqw5oUQK9ihBBgpqxEZUytgD3urvpAk3x2GbuFkChrqbYPkpx1
+✅ Medical record transaction: JioMjD6BLgsehEFaiR8qgFwN6MZ9LJzvUzjWdQpXtXZjfwt2oq8tG5nqr7gY81sJDW8L7t6xpwwZNSfq1fjew2L
 ✅ Medical record successfully added and verified!
-    ✔ It adds a medical record for an animal (8010ms)
+    ✔ It adds a medical record for an animal (3600ms)
 🔍 Deriving Behaviour Record PDA...
-🔍 Behaviour Record PDA: CZtuGJXNiGvrxV5cSG4kySYsckyGkcqyG8rBagic2dai
+🔍 Behaviour Record PDA: CAAwEFcSSZH9VRaAqUwGHiTs2WtSTApRboQBnwbVC6B2
+⚠️ Behaviour record does not exist, creating a new one...
 🚀 Adding behaviour record...
-✅ Behaviour record transaction: bCvoCmCSuC8iDDLN7yLbaZvZyv6rXJvw9Q2WwnaDdpQWcgXUoR7dA8cccJpXcLNou9EhwK8qEWgQjS8xwfGLoq3
+✅ Behaviour record transaction: 3qx7i6LE6fY7BjPuq5JXjZKJgxkBdxTQzchoJWYVbRrmDFQVQ1VzMqNcPs4HLi9QBDzszGuYMr4UbBtd7xrHTKh3
 ✅ Behaviour record successfully added and verified!
-    ✔ It adds a behaviour record for an animal (4310ms)
+    ✔ It adds a Behaviour record for an animal (1966ms)
+
+
+  10 passing (27s)
 
 ```
 

@@ -48,7 +48,7 @@ pub fn add_medical_record(ctx: Context<AddMedicalRecord>, record: Vec<u8>) -> Re
         };
 
         // ✅ Deserialize manually to extract VetAuthority
-        let mut vet_authority = match
+        let vet_authority = match
             VetAuthority::try_deserialize(&mut vet_authority_data.as_ref())
         {
             Ok(vet) => vet,

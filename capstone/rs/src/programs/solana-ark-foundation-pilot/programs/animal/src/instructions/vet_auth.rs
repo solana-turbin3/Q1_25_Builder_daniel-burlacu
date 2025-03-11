@@ -1,5 +1,4 @@
 use anchor_lang::prelude::*;
-use crate::contexts::check_vet_auth::CheckVetAuthority;
 use crate::entities::VetAuthority;
 use crate::{entities::AuthorityRequest,errors::ErrorCode};
 use crate::ApproveOrRejectAuthority;

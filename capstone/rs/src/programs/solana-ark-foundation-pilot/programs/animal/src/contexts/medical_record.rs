@@ -1,27 +1,7 @@
 // contexts/initialize.rs
 #![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
-use crate::entities::{Animal, MedicalRecord}; // Import VetAuthority
-
-// #[derive(Accounts)]
-// pub struct AddMedicalRecord<'info> {
-//     #[account(mut)]
-//     pub signer: Signer<'info>, // Vet adding the record
-
-//     #[account(
-//         init_if_needed,
-//         payer = signer,
-//         seeds = [b"medical_record", animal.key().as_ref(), signer.key().as_ref()],
-//         bump,
-//         space = 8 + 32 + 32 + 8 + 200 // ✅ Adjust space (header + fixed fields + extra for Vec<u8>)
-//     )]
-//     pub medical_record: Account<'info, MedicalRecord>, // ✅ The medical record PDA
-
-//     #[account(mut)]
-//     pub animal: Account<'info, Animal>, // ✅ The animal to link the record to
-
-//     pub system_program: Program<'info, System>,
-// }
+use crate::entities::MedicalRecord; // Import VetAuthority
 
 #[derive(Accounts)]
 pub struct AddMedicalRecord<'info> {

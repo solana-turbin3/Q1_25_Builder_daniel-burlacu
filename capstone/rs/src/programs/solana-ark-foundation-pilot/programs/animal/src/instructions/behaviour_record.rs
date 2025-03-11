@@ -55,7 +55,7 @@ pub fn add_behaviour_record(
     };
 
     // ✅ Deserialize manually to extract VetAuthority
-    let mut vet_authority = match VetAuthority::try_deserialize(&mut vet_authority_data.as_ref()) {
+    let vet_authority = match VetAuthority::try_deserialize(&mut vet_authority_data.as_ref()) {
         Ok(vet) => vet,
         Err(err) => {
             msg!("❌ Failed to deserialize VetAuthority.");
