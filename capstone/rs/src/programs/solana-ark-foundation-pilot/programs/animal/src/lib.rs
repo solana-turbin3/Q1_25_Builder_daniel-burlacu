@@ -8,8 +8,10 @@ pub mod contexts;
 pub mod entities;
 pub mod instructions;
 
+use crate::contexts::check_vet_auth::CheckVetAuthority;
 use crate::contexts::*;
 use crate::instructions::initialize;
+use crate::contexts::req_auth::RequestAuthority;
 
 #[program]
 pub mod solana_animal {

@@ -17,18 +17,17 @@ const WALLET_PATH_ANIMAL = `${process.env.HOME}/.solana/.config/animal_wallet.js
 
 describe("solana-ark-foundation-pilot", () => {
   // Configure the client to use the local cluster.
-  //const provider = anchor.AnchorProvider.local();
-  // const provider = new anchor.AnchorProvider(
-  //   new anchor.web3.Connection("http://127.0.0.1:8898", "processed"),
-  //   anchor.Wallet.local(),
-  //   {}
-  // );
-
   const provider = new anchor.AnchorProvider(
-    new anchor.web3.Connection("https://api.devnet.solana.com", "processed"), // ✅ Use Devnet RPC
+    new anchor.web3.Connection("http://127.0.0.1:8898", "processed"),
     anchor.Wallet.local(),
     {}
-);
+  );
+
+//   const provider = new anchor.AnchorProvider(
+//     new anchor.web3.Connection("https://api.devnet.solana.com", "processed"), // ✅ Use Devnet RPC
+//     anchor.Wallet.local(),
+//     {}
+// );
 
   
   anchor.setProvider(provider);
@@ -57,20 +56,20 @@ describe("solana-ark-foundation-pilot", () => {
   let ownerPda: PublicKey; // Owner PDA
 
   before(async () => {
-    // const lamports = 10 * anchor.web3.LAMPORTS_PER_SOL; // Amount to airdrop
-    // const ownerWalletBalance = await provider.connection.getBalance(ownerWallet.publicKey);
-    // const veterinaryWalletBalance = await provider.connection.getBalance(veterinaryWallet.publicKey);
-    // const animalWalletBalance = await provider.connection.getBalance(animalWallet.publicKey);
+    const lamports = 10 * anchor.web3.LAMPORTS_PER_SOL; // Amount to airdrop
+    const ownerWalletBalance = await provider.connection.getBalance(ownerWallet.publicKey);
+    const veterinaryWalletBalance = await provider.connection.getBalance(veterinaryWallet.publicKey);
+    const animalWalletBalance = await provider.connection.getBalance(animalWallet.publicKey);
 
-    // if (ownerWalletBalance === 0) {
-    //     await provider.connection.requestAirdrop(ownerWallet.publicKey, lamports);
-    // }
-    // if (veterinaryWalletBalance === 0) {
-    //     await provider.connection.requestAirdrop(veterinaryWallet.publicKey, lamports);
-    // }
-    // if (animalWalletBalance === 0) {
-    //     await provider.connection.requestAirdrop(animalWallet.publicKey, lamports);
-    // }
+    if (ownerWalletBalance === 0) {
+        await provider.connection.requestAirdrop(ownerWallet.publicKey, lamports);
+    }
+    if (veterinaryWalletBalance === 0) {
+        await provider.connection.requestAirdrop(veterinaryWallet.publicKey, lamports);
+    }
+    if (animalWalletBalance === 0) {
+        await provider.connection.requestAirdrop(animalWallet.publicKey, lamports);
+    }
 
     // 🕒 Wait for airdrop to complete
     await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -90,15 +89,15 @@ describe("solana-ark-foundation-pilot", () => {
         animal_program.programId
     );
 
-    const [vetAuthPda] = PublicKey.findProgramAddressSync(
-      [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalWallet.publicKey.toBuffer()], // ✅ Matches Rust struct
-      animal_program.programId
-  );
+  //   const [vetAuthPda] = PublicKey.findProgramAddressSync(
+  //     [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalWallet.publicKey.toBuffer()], // ✅ Matches Rust struct
+  //     animal_program.programId
+  // );
   
     console.log("✅ Veterinary PDA:", veterinaryPda.toBase58());
     console.log("✅ Owner PDA:", ownerPda.toBase58());
     console.log("✅ Animal PDA:", animalPda.toBase58());
-    console.log("✅ Vet Authority PDA:", vetAuthPda.toBase58());
+    // console.log("✅ Vet Authority PDA:", vetAuthPda.toBase58());
 });
 
   it("It initializes the veterinary account if it does not exist", async () => {
@@ -179,14 +178,14 @@ describe("solana-ark-foundation-pilot", () => {
         // ✅ Try fetching the animal PDA
         const animalAccount = await animal_program.account.animal.fetch(animalPda);
         assert.ok(animalAccount);
-        console.log("✅ Animal PDA already exists:", animalPda.toBase58());
+       // console.log("✅ Animal PDA already exists:", animalPda.toBase58());
     } catch (err) {
         if (err.message.includes("Account does not exist")) {
             console.log("⚠️ Animal account does not exist, initializing...");
 
             // ✅ Ensure `animalPda` is correct
             console.log("🔍 Owner PDA:", ownerPda.toBase58());
-            console.log("🔍 Animal PDA:", animalPda.toBase58());
+            // console.log("🔍 Animal PDA:", animalPda.toBase58());
 
             // ✅ Initialize the animal account
             const tx = await animal_program.methods
@@ -195,7 +194,7 @@ describe("solana-ark-foundation-pilot", () => {
                     payer: ownerWallet.publicKey,
                     animal: animalPda, // ✅ Correct animal PDA
                     owner: ownerPda, // ✅ Ensure correct owner PDA
-                    vetAuthority: vetAuthPda, // ✅ Vet Authority PDA must exist
+           //         vetAuthority: vetAuthPda, // ✅ Vet Authority PDA must exist
                     systemProgram: SystemProgram.programId,
                 })
                 .signers([ownerWallet])
@@ -342,34 +341,53 @@ it("It approves the veterinary cabinet's authority request.", async () => {
       assert.strictEqual(authorityRequest.status, 0, "❌ Authority request should be pending before approval.");
 
       // ✅ Derive the Vet Authority PDA (Final Approval PDA)
-      const [vetAuthPda] = PublicKey.findProgramAddressSync(
-        [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalWallet.publicKey.toBuffer()], // ✅ Matches Rust struct
-        animal_program.programId
+    //   const [vetAuthPda] = PublicKey.findProgramAddressSync(
+    //     [Buffer.from("vet_authority"), veterinaryPda.toBuffer(), animalPda.toBuffer()], // ✅ Matches Rust struct
+    //     animal_program.programId
+    // );
+    const [vetAuthPda] = PublicKey.findProgramAddressSync(
+      [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalPda.toBuffer()],
+      animal_program.programId
     );
-    
+      console.log("🔍Passing the Vet Authority PDA:", vetAuthPda.toBase58());
 
-      console.log("🔍 Vet Authority PDA:", vetAuthPda.toBase58());
+      const desicion: number = 1; // 1 = Approve, 2 = Reject
 
-      // // ✅ Step 3: Owner approves the request
+    // ✅ Step 3: Owner approves the request
+      // console.log("🚀 Approving request...");
+      // const approveTx = await animal_program.methods
+      //     .approveOrRejectAuthority(desicion) // 1 = Approve, 2 = Reject
+      //     .accounts({
+      //         owner: ownerWallet.publicKey, // ✅ Owner must sign
+      //         veterinary: veterinaryPda, // ✅ Veterinary PDA (matches Rust)
+      //         animal: animalPda, // ✅ Animal PDA (matches Rust)
+      //         authorityRequest: vetAuthRequestPda, // ✅ Ensure correct PDA is passed
+      //         systemProgram: SystemProgram.programId,
+      //     })
+      //     .signers([ownerWallet])
+      //     .rpc();
+      // Deny the request
+
       console.log("🚀 Approving request...");
       const approveTx = await animal_program.methods
-          .approveOrRejectAuthority(1) // 1 = Approve, 2 = Reject
-          .accounts({
-              owner: ownerWallet.publicKey, // ✅ Owner must sign
-              veterinary: veterinaryPda, // ✅ Veterinary PDA (matches Rust)
-              animal: animalPda, // ✅ Animal PDA (matches Rust)
-              authorityRequest: vetAuthRequestPda, // ✅ Ensure correct PDA is passed
-              systemProgram: SystemProgram.programId,
-          })
-          .signers([ownerWallet])
-          .rpc();
+              .approveOrRejectAuthority(desicion) // 1 = Approve, 2 = Reject
+              .accounts({
+                  owner: ownerWallet.publicKey, // ✅ Owner must sign
+                  veterinary: veterinaryWallet.publicKey, // ✅ Vet Authority PDA (matches Rust)
+                  vet_authority: vetAuthPda, // ✅ Vet Authority PDA (matches Rust)
+                  animal: animalPda, // ✅ Animal PDA (matches Rust)
+                  authorityRequest: vetAuthRequestPda, // ✅ Ensure correct PDA is passed
+                  systemProgram: SystemProgram.programId,
+              })
+              .signers([ownerWallet])
+              .rpc();
 
       console.log("✅ Authority request approved, transaction:", approveTx);
 
       // // ✅ Step 4: Verify Request is Now Approved
       const updatedRequest = await animal_program.account.authorityRequest.fetch(vetAuthRequestPda);
      // assert.strictEqual(updatedRequest.status, 1, "❌ Request should be approved.");
-      console.log("🔍 Request Status (Approved):", updatedRequest.status);
+    desicion === 2 ? console.log("🔍 Request Status (Denied):", updatedRequest.status) : console.log("🔍 Request Status (Approved):", updatedRequest.status);
   } catch (error) {
       console.error("❌ Error approving authority request:", error);
       assert.fail(`Test failed: ${error.message}`);
@@ -377,78 +395,76 @@ it("It approves the veterinary cabinet's authority request.", async () => {
 });
 
 it("Lists all VetAuthority accounts and extracts their stored vet_pubkey", async () => {
-  try {
-    console.log("🔍 Fetching all VetAuthority accounts...");
+  const vetPubkey = veterinaryWallet.publicKey; // Vet public key to search for
 
-    // ✅ Fetch all accounts of type VetAuthority
+  try {
+    
+    console.log(`🔍 Searching VetAuthority accounts for VetPubkey: ${vetPubkey.toBase58()}...`);
+    
     const vetAuthorities = await provider.connection.getProgramAccounts(animal_program.programId, {
       filters: [
         {
-          dataSize: 73, // ✅ Match the expected size of VetAuthority struct
+          dataSize: 73, // ✅ Total space including discriminator
+        },
+        {
+          memcmp: {
+            offset: 8, // ✅ `vet_pubkey` starts at byte 8 (AFTER the discriminator)
+            bytes: veterinaryWallet.publicKey.toBase58(),
+          },
         },
       ],
     });
-
-    console.log(`✅ Found ${vetAuthorities.length} VetAuthority accounts`);
-
-    vetAuthorities.forEach(({ pubkey, account }, index) => {
-      const storedData = account.data;
-
-      // ✅ Extract first 32 bytes as vet_pubkey
-      const vetPubkey = new PublicKey(storedData.slice(0, 32));
-
-      // ✅ Extract next 32 bytes as animal_pubkey
-      const animalPubkey = new PublicKey(storedData.slice(32, 64));
-
-      // ✅ Extract last byte as is_authorized
-      const isAuthorized = storedData[64]; // Last byte
-
+    
+    
+    const allVetAuthorities = await provider.connection.getProgramAccounts(animal_program.programId, {
+      filters: [{ dataSize: 73 }], // ✅ Get all VetAuthority accounts
+    });
+    
+    console.log(`✅ Found ${allVetAuthorities.length} total VetAuthority accounts`);
+    
+    allVetAuthorities.forEach(({ pubkey, account }, index) => {
       console.log(`🔍 VetAuthority #${index + 1}: ${pubkey.toBase58()}`);
-      console.log(`    🟢 Vet Pubkey: ${"3hoShi4sSwVb2iLUCPG8nJtrGHRApiCBT5pYTMePResZ"}`);
-      console.log(`    🟢 Animal Pubkey: ${"3Vgk6ieHeQ49awnjjsGG7ZnfiWAn3pgFra7aBgoerKVH"}`);
-      console.log(`    🔵 is_authorized: 1`);
+      console.log(`    🟢 Vet Pubkey: ${new PublicKey(account.data.slice(8, 40)).toBase58()}`);
+      console.log(`    🟢 Animal Pubkey: ${new PublicKey(account.data.slice(40, 72)).toBase58()}`);
+      console.log(`    🔵 is_authorized: ${account.data[72]}`);
       console.log("--------------------------------------------------");
     });
 
-    // ✅ If no VetAuthority accounts exist
-    if (vetAuthorities.length === 0) {
-      console.log("❌ No VetAuthority accounts found!");
-    }
   } catch (error) {
     console.error("❌ Error fetching VetAuthority accounts:", error);
     assert.fail(`Test failed: ${error.message}`);
   }
 });
 
-// it("It checks if veterinary cabinet has authority for an animal", async () => {
-//   try {
-//     console.log("🔍 Checking Vet Authority...");
+it("It checks if veterinary cabinet has authority for an animal", async () => {
+  try {
+    console.log("🔍 Checking Vet Authority...");
 
-//     // ✅ Derive the vet authority PDA
-//     const [vetAuthPda] = PublicKey.findProgramAddressSync(
-//       [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalPda.toBuffer()],
-//       animal_program.programId
-//     );
+    // ✅ Derive the vet authority PDA
+    const [vetAuthPda] = PublicKey.findProgramAddressSync(
+      [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalPda.toBuffer()],
+      animal_program.programId
+    );
 
-//     console.log("🔍 Vet Authority PDA:", vetAuthPda.toBase58());
+    console.log("🔍 Vet Authority PDA:", vetAuthPda.toBase58());
 
-//     // ✅ Call the function to check vet authority
-//     const vetAuthority = await animal_program.account.vetAuthority.fetch(vetAuthPda);
+    // ✅ Call the function to check vet authority
+    const vetAuthority = await animal_program.account.vetAuthority.fetch(vetAuthPda);
 
-//     assert.ok(vetAuthority, "Vet Authority should exist.");
-//     assert.ok(vetAuthority.isAuthorized, "Vet should be authorized.");
-//     assert.strictEqual(
-//       vetAuthority.vetPubkey.toBase58(),
-//       veterinaryWallet.publicKey.toBase58(),
-//       "Vet Authority should belong to the correct veterinary cabinet."
-//     );
+    assert.ok(vetAuthority, "Vet Authority should exist.");
+    assert.ok(vetAuthority.isAuthorized, "Vet should be authorized.");
+    assert.strictEqual(
+      vetAuthority.vetPubkey.toBase58(),
+      veterinaryWallet.publicKey.toBase58(),
+      "Vet Authority should belong to the correct veterinary cabinet."
+    );
 
-//     console.log("✅ Vet authority check passed!");
-//   } catch (error) {
-//     console.error("❌ Error checking vet authority:", error);
-//     assert.fail(`Test failed: ${error.message}`);
-//   }
-// });
+    console.log("✅ Vet authority check passed!");
+  } catch (error) {
+    console.error("❌ Error checking vet authority:", error);
+    assert.fail(`Test failed: ${error.message}`);
+  }
+});
 
 it("It adds a medical record for an animal", async () => {
   try {
@@ -457,6 +473,12 @@ it("It adds a medical record for an animal", async () => {
     // ✅ Derive the medical record PDA
     const [medicalRecordPda] = PublicKey.findProgramAddressSync(
       [Buffer.from("medical_record"), animalPda.toBuffer(), veterinaryWallet.publicKey.toBuffer()],
+      animal_program.programId
+    );
+
+     // ✅ Derive the vet authority PDA
+     const [vetAuthPda] = PublicKey.findProgramAddressSync(
+      [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalPda.toBuffer()],
       animal_program.programId
     );
 
@@ -470,6 +492,7 @@ it("It adds a medical record for an animal", async () => {
       .addMedicalRecord(recordData) // ✅ Pass as a properly formatted byte array
       .accounts({
         signer: veterinaryWallet.publicKey, // Vet adding the record
+        vetAuthority: vetAuthPda, // ✅ Vet authority PDA
         medicalRecord: medicalRecordPda, // ✅ The medical record PDA
         animal: animalPda, // ✅ Link the record to the correct animal
         systemProgram: SystemProgram.programId,
@@ -504,6 +527,12 @@ it("It adds a Behaviour record for an animal", async () => {
       animal_program.programId
     );
 
+    // ✅ Derive the vet authority PDA
+    const [vetAuthPda] = PublicKey.findProgramAddressSync(
+        [Buffer.from("vet_authority"), veterinaryWallet.publicKey.toBuffer(), animalPda.toBuffer()],
+        animal_program.programId
+    );
+
     console.log("🔍 Behaviour Record PDA:", behaviourRecordPda.toBase58());
 
     // ✅ Add a medical record (without VetAuthority check)
@@ -514,7 +543,8 @@ it("It adds a Behaviour record for an animal", async () => {
       .addBehaviourRecord(recordData) // ✅ Pass as a properly formatted byte array
       .accounts({
         signer: veterinaryWallet.publicKey, // Vet adding the record
-        medicalRecord: behaviourRecordPda, // ✅ The medical record PDA
+        vetAuthority: vetAuthPda, // ✅ Vet authority PDA
+        behaviourRecord: behaviourRecordPda, // ✅ The medical record PDA
         animal: animalPda, // ✅ Link the record to the correct animal
         systemProgram: SystemProgram.programId,
       })

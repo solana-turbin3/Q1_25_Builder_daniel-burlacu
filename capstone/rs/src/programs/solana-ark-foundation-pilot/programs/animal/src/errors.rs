@@ -3,6 +3,10 @@ use anchor_lang::prelude::*;
 
 #[error_code]
 pub enum ErrorCode {
+    #[msg("Record already exists")]
+    RecordAlreadyExists,
+    #[msg("Record too large")]
+    RecordTooLarge,
     #[msg("Invalid vet authority.")]
     InvalidVetAuthority,
     #[msg("Invalid request status.")]
